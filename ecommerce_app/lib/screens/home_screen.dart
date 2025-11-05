@@ -85,6 +85,8 @@ class _HomeScreenState extends State<HomeScreen> {
             builder: (context, cart, child) {
               // 3. The "Badge" widget adds a small label
               return Badge(
+                backgroundColor: Colors.black87,
+
                 // 4. Get the count from the provider
                 label: Text(cart.itemCount.toString()),
                 // 5. Only show the badge if the count is > 0
