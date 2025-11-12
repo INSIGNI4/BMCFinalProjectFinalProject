@@ -3,142 +3,102 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 import 'package:flutter_native_splash/flutter_native_splash.dart';
-
-// import 'package:ecommerce_app/screens/login_screen.dart';
 import 'package:ecommerce_app/screens/auth_wrapper.dart';
+import 'package:ecommerce_app/providers/cart_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_fonts/google_fonts.dart';
 
+import 'package:flutter/foundation.dart';
 
-import 'package:ecommerce_app/providers/cart_provider.dart'; // 1. ADD THIS
-import 'package:provider/provider.dart'; // 2. ADD THIS
+const Color kBrown = Color(0xFFB30B0B);      // Our main "coffee" brown
+const Color kLightBrown = Color(0xFFD2B48C);  // A lighter tan/beige
+const Color kOffWhite = Color(0xFFF8F4F0);   //A warm, off-white background
 
 void main() async {
-
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-  runApp(
-    // 2. We wrap our app in the provider
-      ChangeNotifierProvider(
-        // 3. This "creates" one instance of our cart
-        create: (context) => CartProvider(),
-        // 4. The child is our normal app
-        child: const MyApp(),
-      ),
-  );
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
 
-  FlutterNativeSplash.remove();
+    if (kIsWeb) {
+      await FirebaseAuth.instance.setPersistence(Persistence.LOCAL);
+    }
+
+    runApp(
+      MultiProvider(
+        providers: [
+          ChangeNotifierProvider<CartProvider>(
+            create: (_) {
+              final cartProvider = CartProvider();
+              cartProvider.initializeAuthListener();
+              return cartProvider;
+            },
+          ),
+        ],
+        child: MyApp(),
+      ),
+    );
+  } catch (e, stack) {
+    print('Initialization error: $e');
+    print(stack);
+    runApp( MyApp());
+  } finally {
+    FlutterNativeSplash.remove();
+  }
 }
 
-
-
-
-
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
-    // 1. MaterialApp is the root of your app
     return MaterialApp(
-      // 2. This removes the "Debug" banner
       debugShowCheckedModeBanner: false,
       title: 'eCommerce App',
       theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
-      ),
-      // 3. A simple placeholder for our home screen
-      // 2. Change the home to AuthWrapper
-      home: const AuthWrapper(),
-    );
-
-  }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
-    return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: kBrown,
+          brightness: Brightness.light,
+          primary: kBrown,
+          onPrimary: Colors.white,
+          secondary: kLightBrown,
+          background: kOffWhite,
+        ),
+        useMaterial3: true,
+        scaffoldBackgroundColor: kOffWhite,
+        textTheme: GoogleFonts.latoTextTheme(
+          Theme.of(context).textTheme,
+        ),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: kBrown,
+            foregroundColor: Colors.white,
+            padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
             ),
-          ],
+          ),
+        ),
+        inputDecorationTheme: InputDecorationTheme(
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: BorderSide(color: Colors.grey[400]!),
+          ),
+          labelStyle: TextStyle(color: kBrown.withOpacity(0.8)),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(12),
+            borderSide: const BorderSide(color: kBrown, width: 2.0),
+          ),
+        ),
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.white,
+          elevation: 0,
+          centerTitle: true,
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      home: AuthWrapper(),
     );
   }
 }

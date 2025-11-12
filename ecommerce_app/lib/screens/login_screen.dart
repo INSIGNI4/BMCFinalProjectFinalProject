@@ -103,7 +103,9 @@ class _LoginScreenState extends State<LoginScreen> {
     // 1. A Scaffold provides the basic screen structure
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Login'),
+        title: const Text('Login',
+        style: TextStyle(color: Colors.white),),
+      backgroundColor: Colors.redAccent,
       ),
       // 2. SingleChildScrollView prevents the keyboard from
       //    causing a "pixel overflow" error
@@ -173,6 +175,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 // 2. The Login Button
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
+                    // backgroundColor: Colors.redAccent,
                     minimumSize: const Size.fromHeight(50), // 3. Make it wide
                   ),
                   // 4. onPressed is the click handler
@@ -192,7 +195,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       ? const CircularProgressIndicator(
                     valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                   )
-                      : const Text('Login'),
+                      : const Text('Login', style: TextStyle(
+                      color: Colors.white),
+                  ),
 
                 ),
 

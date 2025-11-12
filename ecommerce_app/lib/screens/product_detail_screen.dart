@@ -1,30 +1,55 @@
 import 'package:flutter/material.dart';
 
-import 'package:ecommerce_app/providers/cart_provider.dart'; // 1. ADD THIS
-import 'package:provider/provider.dart'; // 2. ADD THIS
+import 'package:ecommerce_app/providers/cart_provider.dart';
+import 'package:provider/provider.dart';
 
-// 1. This is a new StatelessWidget
-class ProductDetailScreen extends StatelessWidget {
 
-  // 2. We will pass in the product's data (the map)
+class ProductDetailScreen extends StatefulWidget {
+
   final Map<String, dynamic> productData;
-  // 3. We'll also pass the unique product ID (critical for 'Add to Cart' later)
   final String productId;
 
-  // 4. The constructor takes both parameters
   const ProductDetailScreen({
     super.key,
     required this.productData,
     required this.productId,
+
   });
+  @override
+  // 2. Create the State class
+  State<ProductDetailScreen> createState() => _ProductDetailScreenState();
+}
+class _ProductDetailScreenState extends State<ProductDetailScreen> {
+
+
+  // 4. ADD OUR NEW STATE VARIABLE FOR QUANTITY
+  int _quantity = 1;
+
+  void _incrementQuantity() {
+    setState(() {
+      _quantity++;
+    });
+  }
+
+  // 2. ADD THIS FUNCTION
+  void _decrementQuantity() {
+    // We don't want to go below 1
+    if (_quantity > 1) {
+      setState(() {
+        _quantity--;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     // The UI will go here next
-    final String name = productData['name'];
-    final String description = productData['description'];
-    final String imageUrl = productData['imageUrl'];
-    final double price = productData['price'];
+    final String name = widget.productData['name'];
+    final String description = widget.productData['description'];
+    final String imageUrl = widget.productData['imageUrl'];
+    // final double price = widget.productData['price'];
+    final double price = (widget.productData['price'] as num).toDouble();
+
 
     final cart = Provider.of<CartProvider>(context, listen: false);
 
@@ -76,8 +101,6 @@ class ProductDetailScreen extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-
-                  // 9. Product Name (large font)
                   Text(
                     name,
                     style: const TextStyle(
@@ -87,7 +110,6 @@ class ProductDetailScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
 
-                  // 10. Price (large font, different color)
                   Text(
                     '₱${price.toStringAsFixed(2)}',
                     style: TextStyle(
@@ -98,7 +120,6 @@ class ProductDetailScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
 
-                  // 11. A horizontal dividing line
                   const Divider(thickness: 1),
                   const SizedBox(height: 16),
 
@@ -117,25 +138,68 @@ class ProductDetailScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 30),
 
+                  const SizedBox(height: 20),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      // 5. DECREMENT BUTTON
+                      IconButton.filledTonal(
+
+                        icon: const Icon(Icons.remove),
+                        style: IconButton.styleFrom(
+                          backgroundColor: Colors.red,
+                          foregroundColor: Colors.white,
+                        ),
+                        onPressed: _decrementQuantity,
+                      ),
+
+                      // 6. QUANTITY DISPLAY
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Text(
+                          '$_quantity', // 7. Display our state variable
+                          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.redAccent),
+                        ),
+                      ),
+
+                      // 8. INCREMENT BUTTON
+                      IconButton.filled(
+                        icon: const Icon(Icons.add),
+                        style: IconButton.styleFrom(
+                          backgroundColor: Colors.red,
+                          foregroundColor: Colors.white,
+                        ),
+                        onPressed: _incrementQuantity,
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  // --- END OF NEW SECTION ---
+
+
+
+
                   // 13. The "Add to Cart" button (UI ONLY)
                   // It doesn't do anything... yet.
                   ElevatedButton.icon(
                     onPressed: () {
-                      // We will add logic here in Module 8
-                      // print('Product ID to add: $productId');
-                      cart.addItem(productId, name, price);
+                      cart.addItem(
+                        widget.productId,
+                        name,
+                        price,
+                        _quantity, // 11. Pass the selected quantity
+                      );
 
-                      // 5. Show a confirmation pop-up
+                      // 12. Update the SnackBar message
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Added to cart!'),
-                          duration: Duration(seconds: 2),
+                        SnackBar(
+                          content: Text('Added $_quantity x $name to cart!'),
+                          duration: const Duration(seconds: 2),
                         ),
                       );
                     },
                     icon: const Icon(Icons.shopping_cart_outlined,
                       color: Colors.white,),
-
 
                     label: const Text('Add to Cart',
                       style: TextStyle(
@@ -157,6 +221,7 @@ class ProductDetailScreen extends StatelessWidget {
       ),
     );
   }
+
 
 }
 
