@@ -2,6 +2,7 @@ import 'package:ecommerce_app/providers/cart_provider.dart';
 import 'package:ecommerce_app/screens/payment_screen.dart'; // 1. Import PaymentScreen
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:ecommerce_app/main.dart';
 
 // 2. It's a StatelessWidget again!
 class CartScreen extends StatelessWidget {
@@ -13,10 +14,13 @@ class CartScreen extends StatelessWidget {
     final cart = Provider.of<CartProvider>(context);
 
     return Scaffold(
+      backgroundColor: Colors.yellow[50],
       appBar: AppBar(
+        backgroundColor: topbarBGC,
+        foregroundColor: Colors.white,
         title: const Text('Your Cart',
         style: TextStyle(color: Colors.white),),
-        backgroundColor: Colors.redAccent,
+
       ),
       body: Column(
         children: [
@@ -58,10 +62,13 @@ class CartScreen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Column(
+
                 children: [
                   Row(
+
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+
                       const Text('Subtotal:', style: TextStyle(fontSize: 16)),
                       Text('₱${cart.subtotal.toStringAsFixed(2)}', style: const TextStyle(fontSize: 16)),
                     ],
@@ -81,7 +88,7 @@ class CartScreen extends StatelessWidget {
                       const Text('Total:', style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
                       Text(
                         '₱${cart.totalPriceWithVat.toStringAsFixed(2)}',
-                        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.deepPurple),
+                        style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.green,fontFamily: 'Roboto'),
                       ),
                     ],
                   ),

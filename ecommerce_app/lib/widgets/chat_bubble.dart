@@ -22,13 +22,14 @@ class ChatBubble extends StatelessWidget {
         margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
         // 2. Different color for me vs. them
         decoration: BoxDecoration(
-          color: isCurrentUser ? Colors.deepPurple[400] : Colors.grey[200],
+          color: isCurrentUser ? Colors.green[200] : Colors.red[100],
           borderRadius: BorderRadius.circular(12),
+
         ),
         child: Text(
           message,
           style: TextStyle(
-            color: isCurrentUser ? Colors.white : Colors.black87,
+            color: isCurrentUser ? Colors.black : Colors.black87,
             fontSize: 16,
           ),
         ),

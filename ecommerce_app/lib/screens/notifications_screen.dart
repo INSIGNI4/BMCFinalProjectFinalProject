@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart'; // For formatting the date
+import 'package:ecommerce_app/main.dart';
 
 class NotificationsScreen extends StatefulWidget {
   const NotificationsScreen({super.key});
@@ -53,10 +54,13 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.yellow[50],
       appBar: AppBar(
+        backgroundColor: topbarBGC,
+        foregroundColor: Colors.white,
         title: const Text('Notifications',
           style: TextStyle(color: Colors.white),),
-        backgroundColor: Colors.redAccent,
+
 
       ),
       body: _user == null

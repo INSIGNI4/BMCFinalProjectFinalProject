@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
-
+import 'package:ecommerce_app/main.dart';
 
 // 1. Create a StatefulWidget
 class SignUpScreen extends StatefulWidget {
@@ -113,7 +113,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
   Widget build(BuildContext context) {
     // 1. A Scaffold provides the basic screen structure
     return Scaffold(
+      backgroundColor: Colors.yellow[50],
       appBar: AppBar(
+        backgroundColor: topbarBGC,
+        foregroundColor: Colors.white,
         title: const Text('Sign Up'), // CHANGE 1
       ),
 
@@ -184,6 +187,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
                 // 2. The Login Button
                 ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    // backgroundColor: Colors.redAccent,
+                    minimumSize: const Size.fromHeight(50), // 3. Make it wide
+                  ),
                   // ... (style is the same)
                   onPressed: _signUp,
                   //     () {

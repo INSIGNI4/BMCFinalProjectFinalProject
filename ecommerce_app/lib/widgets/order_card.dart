@@ -36,11 +36,12 @@ class OrderCard extends StatelessWidget {
           title: Text(
             'Total: ₱${(orderData['totalPrice'] as num).toDouble().toStringAsFixed(2)}',
             // 'Total: ₱${(orderData['totalPrice'] as double).toStringAsFixed(2)}',
-            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 18,fontFamily: 'Roboto', color: Color(0xFF006400)),
           ),
 
           // 8. Subtitle: Item count and Status
           subtitle: Text(
+            style: TextStyle(fontWeight: FontWeight.bold),
             'Items: ${orderData['itemCount']}\n'
                 'Status: ${orderData['status']}',
           ),
@@ -48,7 +49,7 @@ class OrderCard extends StatelessWidget {
           // 9. Trailing: The formatted date
           trailing: Text(
             formattedDate,
-            style: const TextStyle(fontSize: 12, color: Colors.grey),
+            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold,color: Colors.brown),
           ),
 
           // 10. Allows the subtitle to have 2 lines

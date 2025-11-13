@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_app/widgets/chat_bubble.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:ecommerce_app/main.dart';
 
 class ChatScreen extends StatefulWidget {
   // 1. This is the "chat room ID". It's just the user's ID.
@@ -119,8 +120,11 @@ class _ChatScreenState extends State<ChatScreen> {
     final User? currentUser = _auth.currentUser;
 
     return Scaffold(
+      backgroundColor: Colors.yellow[50],
       appBar: AppBar(
-        backgroundColor: Colors.redAccent,
+        backgroundColor: topbarBGC,
+        foregroundColor: Colors.white,
+
         // Show "Chat with [User Email]" for admin, or "Contact Admin" for user
         title: Text(widget.userName ?? 'Contact Admin',
         style: TextStyle(
@@ -176,16 +180,22 @@ class _ChatScreenState extends State<ChatScreen> {
               children: [
                 Expanded(
                   child: TextField(
+
                     controller: _messageController,
                     decoration: const InputDecoration(
                       hintText: 'Type your message...',
-                      border: OutlineInputBorder(),
+                      fillColor: Colors.white,
+                      filled: true,
+                      border: OutlineInputBorder(
+
+                      ),
                     ),
                     onSubmitted: (value) => _sendMessage(),
                   ),
                 ),
                 IconButton(
-                  icon: const Icon(Icons.send),
+                  icon: const Icon(Icons.send,
+                  color: topbarBGC,),
                   onPressed: _sendMessage,
                 ),
               ],

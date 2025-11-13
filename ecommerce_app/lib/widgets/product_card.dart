@@ -9,6 +9,8 @@ class ProductCard extends StatelessWidget {
   final num price;
   final String imageUrl;
   final VoidCallback onTap;
+  final Color? backgroundColor;
+  final Color? priceColor;
 
   // 3. The constructor takes this data
   const ProductCard({
@@ -17,6 +19,8 @@ class ProductCard extends StatelessWidget {
     required this.price,
     required this.imageUrl,
     required this.onTap,
+    this.backgroundColor,
+    this.priceColor,
   });
 
   @override
@@ -44,8 +48,13 @@ class ProductCard extends StatelessWidget {
               ),
             ),
             Expanded(
+
               flex: 2,
-              child: Padding(
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.brown[600], // <-- Change to any color you want
+
+                ),
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -55,18 +64,20 @@ class ProductCard extends StatelessWidget {
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 16,
+                        color: Colors.white
                       ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                     ),
                     const Spacer(),
                     Text(
-                      '₱${price.toDouble().toStringAsFixed(2)}',
+                      '\u20B1${price.toDouble().toStringAsFixed(2)}',
                       // '₱${price.toStringAsFixed(2)}',
                       style: TextStyle(
                           fontSize: 15,
-                          color: Colors.grey[800],
-                          fontWeight: FontWeight.bold),
+                          color: Colors.green[100],
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Roboto')
                     ),
                   ],
                 ),

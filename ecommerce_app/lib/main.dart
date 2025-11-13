@@ -13,7 +13,8 @@ import 'package:flutter/foundation.dart';
 
 const Color kBrown = Color(0xFFB30B0B);      // Our main "coffee" brown
 const Color kLightBrown = Color(0xFFD2B48C);  // A lighter tan/beige
-const Color kOffWhite = Color(0xFFF8F4F0);   //A warm, off-white background
+const Color kOffWhite = Color(0xFFF8F4F0); //A warm, off-white background
+const Color topbarBGC = Color(0xFFB30B0B);
 
 void main() async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();

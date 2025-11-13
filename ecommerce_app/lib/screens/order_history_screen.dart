@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_app/widgets/order_card.dart'; // 1. Import our new card
+import 'package:ecommerce_app/main.dart';
 
 class OrderHistoryScreen extends StatelessWidget {
   const OrderHistoryScreen({super.key});
@@ -12,10 +13,13 @@ class OrderHistoryScreen extends StatelessWidget {
     final User? user = FirebaseAuth.instance.currentUser;
 
     return Scaffold(
+      backgroundColor: Colors.yellow[50],
       appBar: AppBar(
+        backgroundColor: topbarBGC,
+        foregroundColor: Colors.white,
         title: const Text('My Orders',
         style: TextStyle(color: Colors.white),),
-        backgroundColor: Colors.redAccent,
+
       ),
       // 3. Check if the user is logged in
       body: user == null

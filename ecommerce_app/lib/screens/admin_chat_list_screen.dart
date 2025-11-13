@@ -2,6 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_app/screens/chat_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:ecommerce_app/main.dart';
 
 
 class AdminChatListScreen extends StatelessWidget {
@@ -9,8 +10,15 @@ class AdminChatListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.yellow[50],
       appBar: AppBar(
-        title: const Text('Active Chats'),
+        backgroundColor: topbarBGC,
+        foregroundColor: Colors.white,
+
+        title: const Text('Active Chats',
+        style: TextStyle(
+          color: Colors.white
+        ),),
       ),
       body: StreamBuilder<QuerySnapshot>(
         // 1. Query all chats, sorted by last message
@@ -44,7 +52,8 @@ class AdminChatListScreen extends StatelessWidget {
               final int unreadCount = chatData['unreadByAdminCount'] ?? 0;
 
               return ListTile(
-                leading: const Icon(Icons.person),
+                leading: const Icon(Icons.person,
+                color: Colors.blueAccent),
                 title: Text(userEmail, style: const TextStyle(fontWeight: FontWeight.bold)),
                 subtitle: Text(
                   lastMessage,

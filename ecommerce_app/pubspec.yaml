@@ -102,20 +102,11 @@ flutter:
 
 
 flutter_native_splash:
-
-  # 2. Set the background color of your splash screen
-  color: "#FF0000" # This is white
-
-  # 3. Point to your splash logo file
+  color: "#800000" # Maroon
   image: assets/images/splash_logo.png
 
-  # 4. Configuration for the Android splash screen
   android_12:
-    color: "#FF0000"
+    color: "#800000"
     image: assets/images/splash_logo.png
-
-  # 5. Configuration for the web splash screen
-
-  # Web: only supports `true` (boolean), no image/color override
 
   web: true

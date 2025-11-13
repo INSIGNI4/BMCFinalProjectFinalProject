@@ -18,6 +18,7 @@ import 'package:ecommerce_app/screens/profile_screen.dart';
 import 'package:ecommerce_app/widgets/notification_icon.dart';
 
 import 'package:ecommerce_app/screens/chat_screen.dart';
+import 'package:ecommerce_app/main.dart';
 
 
 
@@ -72,8 +73,9 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.amber[50],
       appBar: AppBar(
-        backgroundColor: Colors.redAccent,
+        backgroundColor: topbarBGC,
 
 
         // title: Text(_currentUser != null ? 'Welcome, ${_currentUser!.email}' : 'Home',
@@ -90,10 +92,11 @@ class _HomeScreenState extends State<HomeScreen> {
           Consumer<CartProvider>(
             builder: (context, cart, child) {
               return Badge(
-                backgroundColor: Colors.black87,
+                backgroundColor: Colors.blue,
                 label: Text(cart.itemCount.toString()),
                 isLabelVisible: cart.itemCount > 0,
                 child: IconButton(
+                  tooltip: 'My Cart',
                   color: Colors.white,
                   icon: const Icon(Icons.shopping_cart),
                   onPressed: () {
@@ -226,6 +229,7 @@ class _HomeScreenState extends State<HomeScreen> {
               final productData = productDoc.data() as Map<String, dynamic>;
 
               return ProductCard(
+
                 productName: productData['name'],
                 price: (productData['price'] as num).toDouble(),
                 // price: productData['price'],
@@ -265,14 +269,15 @@ class _HomeScreenState extends State<HomeScreen> {
           // 5. --- THE FIX for "trailing not defined" ---
           //    We wrap the FAB in the Badge widget
           return Badge(
-            backgroundColor: Colors.redAccent,
+            backgroundColor: Colors.blue,
             // 6. Show the count in the badge
             label: Text('$unreadCount'),
             // 7. Only show the badge if the count is > 0
             isLabelVisible: unreadCount > 0,
             // 8. The FAB is now the *child* of the Badge
             child: FloatingActionButton.extended(
-              backgroundColor: Colors.redAccent,
+
+              backgroundColor: Colors.red[900],
               icon: const Icon(Icons.support_agent,
               color: Colors.white,),
               label: const Text('Contact Admin',

@@ -1,6 +1,7 @@
 import 'package:ecommerce_app/screens/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:ecommerce_app/main.dart';
 
 // 1. Create a StatefulWidget
 class LoginScreen extends StatefulWidget {
@@ -102,10 +103,13 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget build(BuildContext context) {
     // 1. A Scaffold provides the basic screen structure
     return Scaffold(
+      backgroundColor: Colors.yellow[50],
       appBar: AppBar(
-        title: const Text('Login',
+        backgroundColor: topbarBGC,
+        foregroundColor: Colors.white,
+        title: const Text('LOGIN',
         style: TextStyle(color: Colors.white),),
-      backgroundColor: Colors.redAccent,
+
       ),
       // 2. SingleChildScrollView prevents the keyboard from
       //    causing a "pixel overflow" error
@@ -196,7 +200,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
                   )
                       : const Text('Login', style: TextStyle(
-                      color: Colors.white),
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold),
                   ),
 
                 ),

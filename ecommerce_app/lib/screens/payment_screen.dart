@@ -2,6 +2,7 @@ import 'package:ecommerce_app/providers/cart_provider.dart';
 import 'package:ecommerce_app/screens/order_success_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:ecommerce_app/main.dart';
 
 // 1. An enum to represent our different payment methods
 //    This is cleaner than using strings like "gcash"
@@ -74,7 +75,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
     final String formattedTotal = '₱${widget.totalAmount.toStringAsFixed(2)}';
 
     return Scaffold(
+      backgroundColor: Colors.yellow[50],
       appBar: AppBar(
+        backgroundColor: topbarBGC,
+        foregroundColor: Colors.white,
         title: const Text('Confirm Payment'),
       ),
       body: SingleChildScrollView(
@@ -89,7 +93,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
             ),
             Text(
               formattedTotal,
-              style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.deepPurple),
+              style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold, color: Colors.green,fontFamily: 'Roboto'),
             ),
             const SizedBox(height: 24),
             const Divider(),

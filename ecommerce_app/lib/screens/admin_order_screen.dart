@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart'; // We'll use this for dates again
+import 'package:ecommerce_app/main.dart';
 
 
 class AdminOrderScreen extends StatefulWidget {
@@ -82,8 +83,11 @@ class _AdminOrderScreenState extends State<AdminOrderScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.yellow[50],
       appBar: AppBar(
-        title: const Text('Manage Orders'),
+        backgroundColor: topbarBGC,
+        foregroundColor: Colors.white,
+        title: const Text('Manage Orders',style: TextStyle(fontWeight: FontWeight.bold),),
       ),
       // 1. Use a StreamBuilder to get all orders
       body: StreamBuilder<QuerySnapshot>(
@@ -109,6 +113,7 @@ class _AdminOrderScreenState extends State<AdminOrderScreen> {
           final orders = snapshot.data!.docs;
 
           return ListView.builder(
+
             itemCount: orders.length,
             itemBuilder: (context, index) {
               final order = orders[index];
@@ -126,13 +131,17 @@ class _AdminOrderScreenState extends State<AdminOrderScreen> {
 
               // 7. Build a Card for each order
               return Card(
+
+
                 margin: const EdgeInsets.all(8.0),
                 child: ListTile(
                   title: Text(
+
                     'Order ID: ${order.id}', // Show the doc ID
-                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
+                    style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12, color: Colors.red),
                   ),
                   subtitle: Text(
+
                       'User: ${orderData['userId']}\n'
                           'Total: ₱${(orderData['totalPrice']).toStringAsFixed(2)} | Date: $formattedDate'
                   ),

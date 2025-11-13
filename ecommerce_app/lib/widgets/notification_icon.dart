@@ -31,13 +31,18 @@ class NotificationIcon extends StatelessWidget {
 
         // 6. The Badge widget
         return Badge(
-          backgroundColor: Colors.black87,
+          backgroundColor: Colors.blue,
           // 7. Show a small red dot if 'hasUnread' is true
           isLabelVisible: hasUnread,
+          label: const Text(
+            '!', // or a count
+            style: TextStyle(fontSize: 10, color: Colors.white),
+          ),
           // 8. The icon button itself
           child: IconButton(
-            icon: const Icon(Icons.notifications_outlined),
+            icon: const Icon(Icons.notifications_outlined,fontWeight: FontWeight.bold,),
             color: Colors.white,
+
 
             tooltip: 'Notifications',
 

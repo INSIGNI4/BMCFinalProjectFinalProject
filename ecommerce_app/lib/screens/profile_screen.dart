@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:ecommerce_app/main.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -89,10 +90,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.yellow[50],
       appBar: AppBar(
+        backgroundColor: topbarBGC,
+        foregroundColor: Colors.white,
         title: const Text('Profile',
         style: TextStyle(color: Colors.white),),
-        backgroundColor: Colors.redAccent,
+
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -171,7 +175,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   ? const CircularProgressIndicator(
                 valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
               )
-                  : const Text('Change Password'),
+                  : const Text('Change Password',style: TextStyle(fontWeight: FontWeight.bold),),
             ),
 
             const SizedBox(height: 40),
@@ -181,11 +185,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
             // 7. The "Logout" Button
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red[700],
+                backgroundColor: Colors.brown[900],
                 foregroundColor: Colors.white// Make it red
               ),
               onPressed: _signOut,
-              child: const Text('Log Out'),
+              child: const Text('Log Out',
+              style: TextStyle(fontWeight: FontWeight.bold),),
 
             ),
           ],

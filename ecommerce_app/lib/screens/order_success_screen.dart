@@ -1,6 +1,7 @@
 
 import 'package:ecommerce_app/screens/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:ecommerce_app/main.dart';
 
 class OrderSuccessScreen extends StatelessWidget {
   const OrderSuccessScreen({super.key});
@@ -8,7 +9,10 @@ class OrderSuccessScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.yellow[50],
       appBar: AppBar(
+        backgroundColor: topbarBGC,
+        foregroundColor: Colors.white,
         title: const Text('Order Placed!'),
         // 1. This removes the "back" button from the AppBar
         automaticallyImplyLeading: false,

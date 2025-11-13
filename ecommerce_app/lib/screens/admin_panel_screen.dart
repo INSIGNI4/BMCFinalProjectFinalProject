@@ -5,6 +5,8 @@ import 'package:ecommerce_app/screens/admin_order_screen.dart';
 
 import 'package:ecommerce_app/screens/admin_chat_list_screen.dart';
 
+import 'package:ecommerce_app/main.dart';
+
 
 class AdminPanelScreen extends StatefulWidget {
   const AdminPanelScreen({super.key});
@@ -94,19 +96,30 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.yellow[50],
       appBar: AppBar(
-        title: const Text('Admin Panel'),
+        backgroundColor: topbarBGC,
+        foregroundColor: Colors.white,
+        title: const Text('Admin Panel',style: TextStyle(fontWeight: FontWeight.bold),),
+
       ),
       // 1. Lets the user scroll if the keyboard covers the fields
       body: SingleChildScrollView(
+
+
         child: Padding(
+
+
           padding: const EdgeInsets.all(16.0),
+
           // 2. The Form widget that holds our fields
           child: Form(
             key: _formKey, // 3. Link the form to our key
             child: Column(
+
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
+
 
 
 
@@ -121,9 +134,9 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
                     ),
                   ),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.redAccent,
+                    backgroundColor: Colors.red[800],
                     padding: const EdgeInsets.symmetric(vertical: 16),
-                    textStyle: const TextStyle(fontSize: 16),
+                    textStyle: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),
                   ),
                   onPressed: () {
                     // 4. Navigate to our new screen
@@ -138,15 +151,16 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
                 const SizedBox(height: 10),
                 ElevatedButton.icon(
                   icon: const Icon(Icons.chat_bubble_outline,
-                  color: Colors.black,),
+                  color: Colors.white,),
                   label: const Text('View User Chats',
                     style: TextStyle(
-                      color: Colors.black,
+                      color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.yellow[700],
+                    backgroundColor: Colors.yellow[900],
+                    textStyle: const TextStyle(fontSize: 16,fontWeight: FontWeight.bold),
                   ),
                   onPressed: () {
                     Navigator.of(context).push(
@@ -169,7 +183,9 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
                 // 4. The "Image URL" text field
                 TextFormField(
                   controller: _imageUrlController,
-                  decoration: const InputDecoration(labelText: 'Image URL'),
+                  decoration: const InputDecoration(labelText: 'Image URL',
+                    fillColor: Colors.white,
+                    filled: true,),
                   keyboardType: TextInputType.url,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -185,7 +201,9 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
 
                 TextFormField(
                   controller: _nameController,
-                  decoration: const InputDecoration(labelText: 'Product Name'),
+                  decoration: const InputDecoration(labelText: 'Product Name',
+                    fillColor: Colors.white,
+                    filled: true,),
                   validator: (value) =>
                   value!.isEmpty ? 'Please enter a name' : null,
                 ),
@@ -193,7 +211,9 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
 
                 TextFormField(
                   controller: _descriptionController,
-                  decoration: const InputDecoration(labelText: 'Description'),
+                  decoration: const InputDecoration(labelText: 'Description',
+                    fillColor: Colors.white,
+                    filled: true,),
                   maxLines: 3, // Makes the field taller
                   validator: (value) =>
                   value!.isEmpty ? 'Please enter a description' : null,
@@ -203,8 +223,12 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
                 // 7. The "Price" text field
                 TextFormField(
                   controller: _priceController,
-                  decoration: const InputDecoration(labelText: 'Price'),
+
+                  decoration: const InputDecoration(labelText: 'Price',
+                    fillColor: Colors.white,
+                    filled: true, ),
                   keyboardType: TextInputType.number,
+
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter a price';
@@ -220,6 +244,7 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
                 // 8. The "Upload" Button
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.green[800],
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
                   // 9. If loading, disable the button
@@ -231,6 +256,7 @@ class _AdminPanelScreenState extends State<AdminPanelScreen> {
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
+
                     ),),
                 ),
               ],

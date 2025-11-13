@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:ecommerce_app/providers/cart_provider.dart';
 import 'package:provider/provider.dart';
-
+import 'package:ecommerce_app/main.dart';
 
 class ProductDetailScreen extends StatefulWidget {
 
@@ -55,13 +55,15 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
     // 2. The main screen widget
     return Scaffold(
+      backgroundColor: Colors.yellow[50],
       appBar: AppBar(
-        backgroundColor: Colors.redAccent,
+        backgroundColor: topbarBGC,
+        foregroundColor: Colors.white,
         iconTheme: const IconThemeData(
           color: Colors.white,
         ),
         // 3. Show the product name in the top bar
-        title: Text(name,
+        title: Text("Product Details",
           style: const TextStyle(
             color: Colors.white,
           ),
@@ -115,7 +117,8 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w600,
-                      color: Colors.deepPurple,
+                      color: Colors.green[900],
+                      fontFamily: 'Roboto'
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -123,10 +126,23 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                   const Divider(thickness: 1),
                   const SizedBox(height: 16),
 
+
+
+
+
+
+
+
                   // 12. The full description
-                  Text(
-                    'About this item',
-                    style: Theme.of(context).textTheme.titleLarge,
+
+                  Center(
+                    child: Text(
+                      'About this item',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 8),
                   Text(
@@ -136,9 +152,11 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       height: 1.5, // Adds line spacing for readability
                     ),
                   ),
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 20),
 
                   const SizedBox(height: 20),
+
+
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -147,8 +165,12 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
                         icon: const Icon(Icons.remove),
                         style: IconButton.styleFrom(
-                          backgroundColor: Colors.red,
+                          backgroundColor: Colors.brown[500],
                           foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          padding: const EdgeInsets.all(8),
                         ),
                         onPressed: _decrementQuantity,
                       ),
@@ -158,7 +180,7 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                         padding: const EdgeInsets.symmetric(horizontal: 20),
                         child: Text(
                           '$_quantity', // 7. Display our state variable
-                          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.redAccent),
+                          style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black),
                         ),
                       ),
 
@@ -166,8 +188,13 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
                       IconButton.filled(
                         icon: const Icon(Icons.add),
                         style: IconButton.styleFrom(
-                          backgroundColor: Colors.red,
+                          backgroundColor: Colors.brown[600],
                           foregroundColor: Colors.white,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          padding: const EdgeInsets.all(8),
+
                         ),
                         onPressed: _incrementQuantity,
                       ),
@@ -181,36 +208,38 @@ class _ProductDetailScreenState extends State<ProductDetailScreen> {
 
                   // 13. The "Add to Cart" button (UI ONLY)
                   // It doesn't do anything... yet.
-                  ElevatedButton.icon(
-                    onPressed: () {
-                      cart.addItem(
-                        widget.productId,
-                        name,
-                        price,
-                        _quantity, // 11. Pass the selected quantity
-                      );
+                  Center(
+                    child: ElevatedButton.icon(
+                      onPressed: () {
+                        cart.addItem(
+                          widget.productId,
+                          name,
+                          price,
+                          _quantity,
+                        );
 
-                      // 12. Update the SnackBar message
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('Added $_quantity x $name to cart!'),
-                          duration: const Duration(seconds: 2),
-                        ),
-                      );
-                    },
-                    icon: const Icon(Icons.shopping_cart_outlined,
-                      color: Colors.white,),
-
-                    label: const Text('Add to Cart',
-                      style: TextStyle(
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Added $_quantity x $name to cart!'),
+                            duration: const Duration(seconds: 2),
+                          ),
+                        );
+                      },
+                      icon: const Icon(
+                        Icons.shopping_cart_outlined,
                         color: Colors.white,
                       ),
-                    ),
-
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.redAccent,
-                      padding: const EdgeInsets.symmetric(vertical: 20,horizontal: 20),
-                      textStyle: const TextStyle(fontSize: 22),
+                      label: const Text(
+                        'Add to Cart',
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.green[900],
+                        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+                        textStyle: const TextStyle(fontSize: 22),
+                      ),
                     ),
                   ),
                 ],
