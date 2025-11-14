@@ -27,7 +27,7 @@ class CartScreen extends StatelessWidget {
           // 4. The ListView is the same as before
           Expanded(
             child: cart.items.isEmpty
-                ? const Center(child: Text('Your cart is empty.'))
+                ? const Center(child: Text('Your cart is empty.',))
                 : ListView.builder(
               itemCount: cart.items.length,
               itemBuilder: (context, index) {
@@ -42,7 +42,7 @@ class CartScreen extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                          '₱${(cartItem.price * cartItem.quantity).toStringAsFixed(2)}'),
+                          '₱${(cartItem.price * cartItem.quantity).toStringAsFixed(2)}',style: TextStyle(fontFamily: "Roboto"),),
                       IconButton(
                         icon: const Icon(Icons.delete, color: Colors.red),
                         onPressed: () {
@@ -70,7 +70,7 @@ class CartScreen extends StatelessWidget {
                     children: [
 
                       const Text('Subtotal:', style: TextStyle(fontSize: 16)),
-                      Text('₱${cart.subtotal.toStringAsFixed(2)}', style: const TextStyle(fontSize: 16)),
+                      Text('₱${cart.subtotal.toStringAsFixed(2)}', style: const TextStyle(fontSize: 16,fontFamily: "Roboto")),
                     ],
                   ),
                   const SizedBox(height: 8),
@@ -78,7 +78,7 @@ class CartScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const Text('VAT (12%):', style: TextStyle(fontSize: 16)),
-                      Text('₱${cart.vat.toStringAsFixed(2)}', style: const TextStyle(fontSize: 16)),
+                      Text('₱${cart.vat.toStringAsFixed(2)}', style: const TextStyle(fontSize: 16,fontFamily: "Roboto")),
                     ],
                   ),
                   const Divider(height: 20, thickness: 1),

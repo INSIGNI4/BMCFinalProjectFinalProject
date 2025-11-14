@@ -4,6 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ecommerce_app/main.dart';
+import 'package:ecommerce_app/screens/auth_wrapper.dart';
 
 // 1. Create a StatefulWidget
 class SignUpScreen extends StatefulWidget {
@@ -74,6 +75,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
           'role': 'user', // 6. Set the default role to 'user'
           'createdAt': FieldValue.serverTimestamp(), // For our records
         });
+        Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => const AuthWrapper()),
+              (route) => false,
+        );
       }
 
 

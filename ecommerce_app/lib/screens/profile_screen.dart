@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ecommerce_app/main.dart';
+import 'package:ecommerce_app/screens/auth_wrapper.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -84,7 +85,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final navigator = Navigator.of(context);
     await _auth.signOut();
 
-    navigator.popUntil((route) => route.isFirst);
+    // navigator.popUntil((route) => route.isFirst);
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (context) => const AuthWrapper()),
+          (route) => false,
+    );
 
   }
   @override

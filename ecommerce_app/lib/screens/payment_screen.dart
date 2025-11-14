@@ -158,7 +158,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                   ? const CircularProgressIndicator(
                 valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
               )
-                  : Text('Pay Now ($formattedTotal)'),
+                  : Text('Pay Now ($formattedTotal)',style: TextStyle(fontFamily: "Roboto"),),
             ),
           ],
         ),
