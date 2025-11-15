@@ -78,13 +78,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
           'role': 'user', // 6. Set the default role to 'user'
           'createdAt': FieldValue.serverTimestamp(), // For our records
         });
-<<<<<<< HEAD
         Navigator.of(context).pushAndRemoveUntil(
           MaterialPageRoute(builder: (context) => const AuthWrapper()),
               (route) => false,
         );
-=======
->>>>>>> ffb2019335a0b31fa3fb3e50cd24d61de13a0117
       }
 
 

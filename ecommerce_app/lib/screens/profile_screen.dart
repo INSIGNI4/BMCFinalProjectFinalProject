@@ -88,15 +88,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final navigator = Navigator.of(context);
     await _auth.signOut();
 
-<<<<<<< HEAD
     // navigator.popUntil((route) => route.isFirst);
     Navigator.of(context).pushAndRemoveUntil(
       MaterialPageRoute(builder: (context) => const AuthWrapper()),
           (route) => false,
     );
-=======
-    navigator.popUntil((route) => route.isFirst);
->>>>>>> ffb2019335a0b31fa3fb3e50cd24d61de13a0117
 
   }
   @override
